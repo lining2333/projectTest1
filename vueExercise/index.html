@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue exercise</title>
+</head>
+<body>
+<div>
+	<ol>
+		<li>问题记录：</li>
+		<li>
+			<h2>列表循环</h2>
+			<div id="app-4">
+			  <ol>
+			    <li v-for="todo in todos">
+			      {{ todo.text }}
+			    </li>
+			  </ol>
+			</div>
+		</li>
+		<li>
+			<h2>处理用户输入（绑定事件）</h2>
+			<div id="app-5">
+				<p>{{message}}</p>
+				<button v-on:click = "reverseMessage">反转消息</button>
+			</div>
+		</li>
+		<li>
+			<h2>v-model 双向绑定</h2>
+			<div id="app-6">
+				<p>{{message}}</p>
+				<textarea v-model = "message"></textarea>
+				<!-- <input type="text" v-model = "message"> -->
+			</div>
+		</li>
+		<li>
+			<h2>组建化应用</h2>
+			<div id="app-7">
+				<ol>
+					<fruits v-for = "thing in fruitList" v-bind:fruit = "thing"></fruits>	
+				</ol>
+			</div>
+		</li>
+		<li>
+			<p>当一个vue实例被创建时，将data对象中所有的属性加入到vue的响应式系统中。</p>
+		</li>
+		<li>
+			<h2>生命周期钩子</h2>
+			<p>
+				<ol>
+					<li>beforeCreate/created</li>
+					<li>beforeMount/mounted</li>
+					<li>beforeUpdate/updated</li>
+					<li>beforeDestroyed/destroyed</li>
+				</ol>
+			</p>
+		</li>
+		<li>
+			<h2>模板语法</h2>
+			<ol>
+				<li>
+					<ol>
+						插值
+						<li>双括号文本插值</li>
+						<li>v-html插入html真实效果</li>
+						<li>v-bind指令可作用于html属性上</li>
+						<li>数据绑定可使用js表达式</li>
+					</ol>
+				</li>
+				<li>
+					<ol>
+						指令
+						<li><p>一些指令可接受参数，如v-bind(绑定属性),v-on（绑定dom事件）。</p></li>
+						<li><p>在2.6.0之后，可使用动态参数，v-bind:[attributeName] = "url",v-on:[eventName] = "doSomething"</p></li>
+						<li><p>指令可使用.增加修饰符，如.prevent代表对于触发的事件调用event.preventDefault()</p></li>
+					</ol>
+					
+				</li>
+				<li>v-bind:href指令可缩写为:href，v-on:click指令可缩写为@click</li>
+			</ol>
+		</li>
+		<li>
+			<h2>计算属性</h2>
+			<ol>
+				<li>对于复杂逻辑，应当使用计算属性computed</li>
+				<li>使用watch侦听属性容易造成watch的滥用</li>
+			</ol>
+		</li>
+		<li>
+			<h2>样式绑定</h2>
+			<ol>
+				<li>绑定class
+					<ol>
+						<li>使用对象完成动态class，数据对象不必内联定义在数组中</li>
+						<li>可使用数组显示class</li>
+						<li>组件上可绑定class</li>
+					</ol>
+				</li>
+				<li>绑定style
+					<ol>
+						<li>通过一个css对象来描述，使用数组可添加多个对象</li>
+						<li>v-bind：style使用需要添加浏览器引擎前缀的css属性时可自动补充前缀。</li>
+
+					</ol>
+				</li>
+			</ol>
+		</li>
+		<li>
+			<h2>条件渲染</h2>
+			<ol>
+				<li>v-if，v-else，v-else-if实现条件渲染，将v-if条件加到template中可实现多个元素的切换。</li>
+				<li>用key管理复用的元素：vue在渲染元素时，通常会复用已有元素，设置具有唯一值的key可避免这种情况</li>
+				<li>v-show，不论条件，总是渲染</li>
+			</ol>
+		</li>
+		<li>
+			<h2>列表渲染</h2>
+			<ol>
+				<li>使用v-for时提供key属性有利于重用和重新排序现有元素</li>
+				<li>对于数组的变异方法也会触发视图更新，当直接利用索引设置一个数组项或修改数组长度时，vue不能检查到数组的变动。</li>
+				<li>使用计算属性来显示过滤，排序后的结果</li>
+				<li>v-for中使用值范围 v-for = “n in 10”</li>
+			</ol>
+		</li>
+
+		<li>
+			<h2>事件处理</h2>
+			<ol>
+				<li>v-on指令监听dom事件，v-on除了直接绑定到一个方法，也可调用方法。</li>
+				<li>修饰符：事件修饰符（.prevent,.capture），按键修饰符(.enter,.tab),系统修饰键(.ctrl,.alt)</li>
+				<li></li>
+			</ol>
+		</li>
+	</ol>
+	<li>
+		<h2>组件示例</h2>
+		<div id="components-demo">
+			<button-counter></button-counter>
+		</div>
+	</li>
+	<li>
+		<h2>自定义事件</h2>
+		<div>
+			v-on事件监听器在dom模板中被自动转化为全小写，因此监听事件写成大写时则可能监听不到，采用kebab-case命名。
+		</div>
+	</li>
+	<li>
+		<h2>动态组件和异步组件</h2>
+		<div>
+			1 使用is特性实现动态组件，使用keep-alive使组件在第一次被创建时缓存。
+			2 异步组件，通过工厂函数来定义组件，在组件需要被渲染的时候才会触发该工厂函数，且会把结果缓存起来供未来重渲染。
+		</div>
+	</li>
+<h1>过渡和动画</h1>
+	<ol>
+		<li>在恰当的时间添加/删除css类名，从而应用过渡和动画效果；在恰当的时机调用钩子函数</li>
+	</ol>
+
+</div>
+
+1 学习了vue的过渡，可复用性，工具，规模化，内在，vue部分的学习还剩下vue迁移和vue框架拓展部分。
+2 安装了erlang，elixir，inotify-tools,phoenix,还没有把项目运行起来。
+
+<!-- centos7中erlang20.2的安装：https://ken.io/note/centos7-erlang-install
+按照  https://confluence.gzemt.cn/pages/viewpage.action?pageId=12583676  安装会出现no java compiler 错误 -->
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
